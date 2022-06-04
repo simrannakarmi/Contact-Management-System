@@ -18,7 +18,7 @@ class ContactController extends Controller
     public function index()
     {
         //GET
-        $user = Auth::user();
+        $user = Auth::User();
 		$contact = Contact::where('user_id', $user->id)->get();
 		return view('contacts.index', compact('contact'));
         //return view('home',['contact'=> Contact::all()]);
@@ -46,6 +46,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //POST
+        $users = User::find(auth()->user()->id);
         $validated = $request->validate([
 
             'first_name'=>'required',
@@ -53,7 +54,7 @@ class ContactController extends Controller
             'email'=>'required',
             'phone'=>'required',
             'address'=>'required',
-            'user_id'=>'required'
+
         ]);
 
         $contact = new Contact();
@@ -64,7 +65,7 @@ class ContactController extends Controller
         $contact->email = strip_tags($request->input('email'));
         $contact->phone = strip_tags($request->input('phone'));
         $contact->address = strip_tags($request->input('address'));
-        $contact->user_id = strip_tags($request->input('user_id'));
+        $contact->user_id = $users->id;
 
         $contact->save();
 
@@ -129,10 +130,6 @@ class ContactController extends Controller
 
         $contact->save();
         return redirect()->route('home')->with('success','Contact Updated!!');
-
-        //return back()->with('success', 'Thank you for contact us!');
-
-
     }
 
     /**
@@ -143,12 +140,18 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $contact = Contact::find($id);
-        $contact->delete();
-        return redirect()->route('home');
-        //return redirect('/contacts')->with('success', 'Contact deleted!!');
+
     }
 
+    public function getProfile(Request $request, $id)
+    {
+        if(Auth::id() == $id) {
+            // valid user
+            $user_info = Auth::user();
+            return view('contact.index', compact("user_info"));
+        } else {
+            //not allowed
+        }
+    }
 
 }

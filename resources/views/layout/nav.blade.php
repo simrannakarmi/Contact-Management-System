@@ -2,15 +2,18 @@
 <html lang="en">
 
 <body>
-    <nav>
+    <nav class="nav-all">
         <h3>Logo</h3>
         <div class="nav-items">
             <span><a href="{{route('home')}}">Home</a></span>
-            <span><a href="{{route('contacts.create')}}">Create Contact</a></span>
+
         </div>
-       
+
+
         <div class="user_details">
-            {{Auth::user()->name}}
+            <span>{{Auth::user()->name}}</Span>
+
+            <span><a href="{{ route('login.view') }}">Log Out</a></span>
         </div>
    </nav>
 </body>

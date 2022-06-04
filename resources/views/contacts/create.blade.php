@@ -53,14 +53,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-item">
-                <lable>Username:</label>
-                <select name="user_id">
-                    @foreach($users as $user)
-                        <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+
             <div class="form-item-submit">
                 <input type="submit" value="Submit" name="submit">
                 <input type="hidden" name="_token" value="{{ Session::token() }}">

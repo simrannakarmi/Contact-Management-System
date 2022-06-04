@@ -129,12 +129,14 @@ class UserController extends Controller
     }
 
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    public function logout(Request $request){
+        //Auth::logout();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
+        Session::flush();
+        auth()->logout();
         return redirect()->route('login.view');
+        //return redirect()->route('login.view');
     }
 
 
@@ -142,6 +144,7 @@ class UserController extends Controller
          //dd(Auth::user());
         $user = User::find(auth()->user()->id);
         $contact = Contact::all();
+
         return view('home',compact('contact','user'));
     }
 

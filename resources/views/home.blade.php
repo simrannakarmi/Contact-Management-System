@@ -3,20 +3,77 @@
 @section('contents')
 <section class="vh-100 gradient-custom">
 
-    <div class="container">
-       <center><h1>Home</h1></center>
-       <p>Your Contact Info:</p>
-       <div class="row justify-content-center">
-        <div class="col">
+@if(session()->get('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
+
+@if(Auth::user()->isAdmin())
+    <center><h2>Welcome Admin</h2></center><br/><br/>
+
+ <div class="row justify-content-center">
+  <div class="col">
+         <div class="card">
+             <center><h1 class="card-header">Contacts</h1></center>
+         <div class="card-body">
+
+             <table class="table">
+                 <thead>
+                         <tr>
+                             <td>ID</td>
+                             <td>First Name</td>
+                             <td>Last Name</td>
+                             <td>Email</td>
+                             <td>Phone No.</td>
+                             <td>Address</td>
+                             <td colspan = 2>Actions</td>
+                         </tr>
+                 </thead>
+                 <tbody>
+                         @foreach($contact as $contact)
+                         <tr>
+                                 <td>{{$contact->id}}</td>
+                                 <td>{{$contact->first_name}}</td>
+                                 <td>{{$contact->last_name}}</td>
+                                 <td>{{$contact->email}}</td>
+                                 <td>{{$contact->phone}}</td>
+                                 <td>{{$contact->address}}</td>
+                                 <td>
+                                      <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Edit</a>
+                                 </td>
+                                 <td>
+                                      <form action="{{ route('contacts.destroy', $contact->id)}}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button class="btn btn-danger" type="submit">Delete</button>
+                                      </form>
+                                 </td>
+                         </tr>
+                         @endforeach
+                 </tbody>
+             </table>
+         </div>
+     </div>
+     </div>
+ </div>
+</div>
+
+@elseif(Auth::user()->isUser())
+
+   <center><h2>Welcome {{ Auth::user()-> name }}</h2></center>
+   <br/><br/>
+    {{ $hasRecord = false }}
+   @foreach ($contact as $contact)
+
+        <div class="row justify-content-center">
+            <div class="col">
+
+            @if(Auth::user()->id == $contact->user_id)
+
                <div class="card">
-                   <h1 class="card-header">Contacts</h1>
-               <div class="card-body">
-
-
-
-                   <div>
-                       <a style="margin: 19px;" href="{{ route('contacts.create')}}" class="btn btn-primary">New contact</a>
-                   </div>
+                   <h1 class="card-header">Your Contact Info:</h1>
+                <div class="card-body">
 
                    <table class="table">
                        <thead>
@@ -27,12 +84,11 @@
                                    <td>Email</td>
                                    <td>Phone No.</td>
                                    <td>Address</td>
-                                   <td>Username</td>
-                                   <td colspan = 2>Actions</td>
+                                   <td>Action</td>
                                </tr>
                        </thead>
                        <tbody>
-                               @foreach($contact as $contact)
+
                                <tr>
                                        <td>{{$contact->id}}</td>
                                        <td>{{$contact->first_name}}</td>
@@ -40,30 +96,31 @@
                                        <td>{{$contact->email}}</td>
                                        <td>{{$contact->phone}}</td>
                                        <td>{{$contact->address}}</td>
-                                       <td>{{$contact->user_id}}</td>
                                        <td>
-                                               <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Edit</a>
-                                       </td>
-                                       <td>
-                                               <form action="{{ route('contacts.destroy', $contact->id)}}" method="post">
-                                                   @csrf
-                                                   @method('DELETE')
-                                                   <button class="btn btn-danger" type="submit">Delete</button>
-                                               </form>
+                                            <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Edit</a>
                                        </td>
                                </tr>
-                               @endforeach
+
                        </tbody>
                    </table>
                </div>
-           </div>
-           </div>
-       </div>
+             </div>
+             {{ $hasRecord = true }}
+             @break
+            @endif
 
-       <form method="post" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-      </form>
-   </div>
+            </div>
+        </div>
+
+   @endforeach
+
+    @if(!$hasRecord)
+        <div>
+            <a style="margin: 19px;" href="{{ route('contacts.create')}}" class="btn btn-primary">New contact</a>
+        </div>
+
+    @endif
+
+@endif
 </section>
 @endsection

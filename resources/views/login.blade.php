@@ -67,7 +67,14 @@
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
             <p>Don't have an account? <a href="/signup" class="link-info">Register here</a></p>
+            <div class="col-6 text-right">
+                @if(Route::has('password.request'))
+                    <a class="btn btn-link px-0" href="{{ route('password.request') }}">
+                        {{ trans('global.forgot_password') }}
+                    </a><br>
+                @endif
 
+            </div>
           </form>
   </div>
 </section>
