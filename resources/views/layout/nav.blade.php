@@ -13,7 +13,7 @@
         <div class="user_details">
             <span>{{Auth::user()->name}}</Span>
 
-            <span><a href="{{ route('login.view') }}">Log Out</a></span>
+            <span><a href="{{ route('logout') }}">Log Out</a></span>
         </div>
    </nav>
 </body>
