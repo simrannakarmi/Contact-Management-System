@@ -27,7 +27,7 @@
                              <td>Email</td>
                              <td>Phone No.</td>
                              <td>Address</td>
-                             <td colspan = 2>Actions</td>
+                             <td colspan = 2 >Actions</td>
                          </tr>
                  </thead>
                  <tbody>

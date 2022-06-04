@@ -13,11 +13,17 @@
             color: red;
             font-weight: bold;
         }
+
+        .gradient-custom-4 {
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgb(106, 216, 150), rgb(103, 214, 229))
+        }
     </style>
 </head>
 <body>
 <section class="vh-100 bg-image"
-  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  style="background-image: url('contact-background.jpg');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -29,8 +35,9 @@
               <form method="post" action="{{route('signup.store')}}" class="form">
                 @csrf
                 <div class="form-outline mb-4">
-                  <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" value="{{ old('name') }}" />
-                  <label class="form-label" for="form3Example1cg">Username</label>
+                    <label class="form-label" for="form3Example1cg">Username</label>
+                    <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" value="{{ old('name') }}" />
+
                     @error('name')
                         <div class="form-error">
                             {{ $message }}
@@ -39,8 +46,9 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" value="{{ old('email') }}" />
-                  <label class="form-label" for="form3Example3cg">Email</label>
+                    <label class="form-label" for="form3Example3cg">Email</label>
+                    <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" value="{{ old('email') }}" />
+
                      @error('email')
                         <div class="form-error">
                             {{ $message }}
@@ -49,8 +57,9 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                    <label class="form-label" for="form3Example4cg">Password</label>
+                    <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
+
                     @error('password')
                         <div class="form-error">
                             {{ $message }}
@@ -59,8 +68,9 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" name="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                    <input type="password" name="password" id="form3Example4cdg" class="form-control form-control-lg" />
+
                     @error('password')
                         <div class="form-error">
                             {{ $message }}
@@ -68,13 +78,14 @@
                     @enderror
                 </div>
 
-                <div class="d-flex justify-content-center">
-                  <input type="submit" value="Register"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="/login-view"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+                <div class="d-flex justify-content-center">
+                    <button type="submit"
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Already have an account?
+                    <a href="/login-view" class="fw-bold text-body"><u>Login here</u></a></p>
 
               </form>
 

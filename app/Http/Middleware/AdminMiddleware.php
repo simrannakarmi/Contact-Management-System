@@ -24,12 +24,13 @@ class AdminMiddleware
 
             if(Auth::user()->role == '1') {
 
-
+                //dd('admin');
                 return $next($request);
             }
             else
             {
-                return redirect()->route('home')->with('message','User View');
+               // dd('NOt admin');
+                return redirect()->route('home.user')->with('message','User View');
             }
         }
         else

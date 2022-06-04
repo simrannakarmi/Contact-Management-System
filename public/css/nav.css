@@ -57,17 +57,21 @@ nav a:hover {
 
 }
 
-.form .form-error {
-    font-size: .75rem;
-    color: red;
-    font-weight: bold;
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
 }
 
-.form div {
-    margin-bottom: 15px;
-}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
-.form div>input {
-    display: block;
-}
+  .sticky + .content {
+    padding-top: 60px;
+  }
 

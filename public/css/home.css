@@ -1,0 +1,17 @@
+tr{
+    text-align: center;
+}
+
+.form .form-error {
+    font-size: .75rem;
+    color: red;
+    font-weight: bold;
+}
+
+.form div {
+    margin-bottom: 15px;
+}
+
+.form div>input {
+    display: block;
+}

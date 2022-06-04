@@ -30,20 +30,30 @@
             color: red;
             font-weight: bold;
         }
+        .form{
+            background-color: white;
+
+            margin-top: 5%;
+        }
+        .btn {
+            background-color: rgb(16, 207, 225);
+            color: black;
+        }
     </style>
 </head>
 <body>
-<section class="vh-100">
+<section class="vh-100" style="background-image: url('contact.png');">
 
   <div class="container-fluid">
 
-          <form style="width: 23rem;" method="post" action="{{route('login')}}" class="form">
+          <form style="width: 23rem;  height:30rem;" method="post" action="{{route('login')}}" class="form">
             @csrf
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log In</h3>
 
             <div class="form-outline mb-4">
-              <input type="email" name="email" id="email" class="form-control form-control-lg" value="{{ old('email') }}" />
-              <label class="form-label" for="form2Example18">Email address</label>
+                <label class="form-label" for="form2Example18">Email address</label>
+                <input type="email" name="email" id="email" class="form-control form-control-lg" value="{{ old('email') }}" />
+
                 @error('email')
                     <div class="form-error">
                         {{ $message }}
@@ -52,8 +62,9 @@
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" name="password" id="password" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Password</label>
+                <label class="form-label" for="form2Example28">Password</label>
+                <input type="password" name="password" id="password" class="form-control form-control-lg" />
+
                 @error('password')
                     <div class="form-error">
                         {{ $message }}
@@ -61,20 +72,12 @@
                 @enderror
             </div>
 
-            <div class="pt-1 mb-4">
+            <div class='login-button'>
               <input class="btn btn-info btn-lg btn-block" type="submit" value="Login">
             </div>
 
-            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
             <p>Don't have an account? <a href="/signup" class="link-info">Register here</a></p>
-            <div class="col-6 text-right">
-                @if(Route::has('password.request'))
-                    <a class="btn btn-link px-0" href="{{ route('password.request') }}">
-                        {{ trans('global.forgot_password') }}
-                    </a><br>
-                @endif
 
-            </div>
           </form>
   </div>
 </section>

@@ -17,7 +17,7 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Auth::routes();
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,13 +32,14 @@ Route::post('/login',[UserController::class,'loggedin'])->name('login');
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
-Route::get('/home',[UserController::class,'home'])->name('home');
+Route::get('/home-user',[UserController::class,'home'])->name('home.user')->middleware('auth');
 
 //admin
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
 
-    Route::get('/home',[UserController::class,'home'])->name('home');
-    Route::resource('/contacts', AdminController::class);
+Route::get('/home',[UserController::class,'home'])->name('home');
+
+    Route::resource('/contacts', ContactController::class);
 });
 
 Route::resource('/contacts', ContactController::class);
