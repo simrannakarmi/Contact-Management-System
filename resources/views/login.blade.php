@@ -11,7 +11,7 @@
         .container-fluid > form{
             height: 25%;
             padding:15px;
-            border:1px solid rgba(0,0,0,0.5);
+            border:1px;
             border-radius:15px;
             display:flex;
             flex-direction:column;
@@ -31,25 +31,32 @@
             font-weight: bold;
         }
         .form{
-            background-color: white;
-
+            background-color: rgba(238, 250, 254, 0.784);
             margin-top: 5%;
         }
         .btn {
             background-color: rgb(16, 207, 225);
             color: black;
         }
+        .alert{
+            text-align: center;
+            color: rgb(255, 0, 0);
+            margin: 0%;
+        }
+        .logout-message{
+            color: rgb(249, 249, 249);
+            text-align: center;
+
+        }
     </style>
 </head>
 <body>
 <section class="vh-100" style="background-image: url('contact.png');">
-
   <div class="container-fluid">
 
           <form style="width: 23rem;  height:30rem;" method="post" action="{{route('login')}}" class="form">
             @csrf
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log In</h3>
-
+            <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log In</h2>
             <div class="form-outline mb-4">
                 <label class="form-label" for="form2Example18">Email address</label>
                 <input type="email" name="email" id="email" class="form-control form-control-lg" value="{{ old('email') }}" />
@@ -72,6 +79,12 @@
                 @enderror
             </div>
 
+            @if(session()->get('message'))
+                <div class="alert alert-message">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
+
             <div class='login-button'>
               <input class="btn btn-info btn-lg btn-block" type="submit" value="Login">
             </div>
@@ -80,6 +93,11 @@
 
           </form>
   </div>
+  @if(session()->get('logout'))
+  <div class="logout-message">
+      <b>{{ session()->get('logout') }}</b>
+  </div>
+@endif
 </section>
 </body>
 </html>

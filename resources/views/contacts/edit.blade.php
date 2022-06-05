@@ -3,12 +3,13 @@
 @section('contents')
 
 <div class="container">
-	<div class="row justify-content-center">
+    <div class="cform">
+    <div class="row justify-content-center">
 	 <div class="col-md-8">
 			<div class="card">
 				<h1 class="card-header">Update Contact</h1>
 			<div class="card-body">
-				<center>	<form method="post" action="{{ route('contacts.update', $contact->id) }}" class="form">
+					<form method="post" action="{{ route('contacts.update', $contact->id) }}" class="form">
 							@method('PATCH')
 							@csrf
 
@@ -64,10 +65,11 @@
                             </div>
 
 					</form>
-                </center>
+
 			</div>
 		</div>
 		</div>
 	</div>
+</div>
 </div>
 @endsection

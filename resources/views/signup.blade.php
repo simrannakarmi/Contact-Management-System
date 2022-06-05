@@ -16,8 +16,10 @@
 
         .gradient-custom-4 {
 
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, rgb(106, 216, 150), rgb(103, 214, 229))
+            background: linear-gradient(rgb(106, 216, 150), rgb(103, 214, 229));
+        }
+        .card {
+            background-color: rgba(239, 228, 228, 0.837);
         }
     </style>
 </head>

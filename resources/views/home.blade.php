@@ -3,14 +3,9 @@
 @section('contents')
 <section class="vh-100 gradient-custom">
 
-@if(session()->get('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div>
-@endif
 
 @if(Auth::user()->isAdmin())
-    <center><h2>Welcome Admin</h2></center><br/><br/>
+<br/><br/><center><h2 class="welcome">Welcome Admin</h2></center><br/><br/>
 
  <div class="row justify-content-center">
   <div class="col">
@@ -61,7 +56,7 @@
 
 @elseif(Auth::user()->isUser())
 
-   <center><h2>Welcome {{ Auth::user()-> name }}</h2></center>
+<br/><br/> <center><h2 class="welcome">Welcome {{ Auth::user()-> name }}</h2></center>
    <br/><br/>
     {{ $hasRecord = false }}
    @foreach ($contact as $contact)
@@ -105,7 +100,7 @@
                    </table>
                </div>
              </div>
-             {{ $hasRecord = true }}
+             <?php $hasRecord = true ?>
              @break
             @endif
 
@@ -115,9 +110,10 @@
    @endforeach
 
     @if(!$hasRecord)
+        <center><p>You haven't created a contact yet!</p>
         <div>
             <a style="margin: 19px;" href="{{ route('contacts.create')}}" class="btn btn-primary">New contact</a>
-        </div>
+        </div></center>
 
     @endif
 

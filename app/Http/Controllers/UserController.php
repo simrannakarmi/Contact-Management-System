@@ -124,7 +124,7 @@ class UserController extends Controller
             return redirect()->route('home')->with('success','You are logged in.');
         }
         else{
-            return redirect()->route('login.view')->with('Incorrect Email or Password.');
+            return redirect()->route('login.view')->with('message','Incorrect Email or Password.');
         }
     }
 
@@ -135,7 +135,7 @@ class UserController extends Controller
         // $request->session()->regenerateToken();
         Session::flush();
         auth()->logout();
-        return redirect()->route('login.view');
+        return redirect()->route('login.view')->with('logout','You are logged out.');
         //return redirect()->route('login.view');
     }
 

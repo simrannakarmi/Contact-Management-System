@@ -3,25 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Role;
 
-class ContactController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //GET
+        // if($request -> search == "") {
+        //     $data = User::orderBy('id','DESC')->paginate(5);
+        //     $roles = Role::pluck('name','name')->all();
+        //     return view('users.index',compact('data','roles'))
+        //     ->with('i',($request->input('page',1) - 1) * 5);
+        // }
+        // else
+        // {
+        //     $data = User::where('name', 'LIKE', '%' .$request->search, '%'
+        //     )->paginate(5);
+        //     $roles = Role::pluck('name','name')->all();
+        //     $data->appends($request->only('users.index'));
+        //     return view('users.index',compact('data','roles'))
+        //     ->with('i',($request->input('page',1) - 1) * 5);
+        // }
         $user = Auth::User();
 		$contact = Contact::where('user_id', $user->id)->get();
-		return view('contacts.index', compact('contact'));
-        //return view('home',['contact'=> Contact::all()]);
+		return view('admin.index', compact('contact'));
     }
 
     /**
@@ -31,11 +44,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('contacts.create',compact('users'));
-        //return view('contacts.create');
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -45,34 +55,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //POST
-        $users = User::find(auth()->user()->id);
-        $validated = $request->validate([
-
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'email'=>'required',
-            'phone'=>'required',
-            'address'=>'required',
-
-        ]);
-
-        $contact = new Contact();
-
-        //$contact->id = strip_tags($request->input('id'));
-        $contact->first_name = strip_tags($request->input('first_name'));
-        $contact->last_name = strip_tags($request->input('last_name'));
-        $contact->email = strip_tags($request->input('email'));
-        $contact->phone = strip_tags($request->input('phone'));
-        $contact->address = strip_tags($request->input('address'));
-        $contact->user_id = $users->id;
-
-        $contact->save();
-
-        return redirect()->route('home')->with('success','Contact Saved!!');
-
-        //return back()->with('success', 'Thank you for contact us!');
-
+        //
     }
 
     /**
@@ -94,10 +77,9 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
         $contact = Contact::find($id);
         $users = User::all();
-        return view('contacts.edit',compact('contact','users'));
+        return view('admin.edit',compact('contact','users'));
     }
 
     /**
@@ -109,7 +91,6 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $validated = $request->validate([
 
             'first_name'=>'required',
@@ -144,16 +125,4 @@ class ContactController extends Controller
         $contact->delete();
         return redirect()->route('home');
     }
-
-    // public function getProfile(Request $request, $id)
-    // {
-    //     if(Auth::id() == $id) {
-    //         // valid user
-    //         $user_info = Auth::user();
-    //         return view('contact.index', compact("user_info"));
-    //     } else {
-    //         //not allowed
-    //     }
-    // }
-
 }
